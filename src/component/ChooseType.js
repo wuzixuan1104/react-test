@@ -6,11 +6,12 @@ class ChooseType extends React.Component {
     super(props);
     this.state = {
       page: Math.ceil(this.props.types.length / 2),
-      currentPage: 1
+      currentPage: 1,
+      types: this.props.types,
+      typeSelectIdx: 1
     };
-    this.changePage = this.changePage.bind(this);
   }
-  changePage(e) {
+  changePage = e => {
     if (this.state.page === 1) return;
 
     let newPage = parseInt(e.target.getAttribute("mode"), 10)
@@ -20,7 +21,10 @@ class ChooseType extends React.Component {
     if (newPage > 0 && newPage < this.state.page + 1) {
       this.setState({ currentPage: newPage });
     }
-  }
+  };
+  clickType = id => {
+    this.setState({ typeSelectIdx: id });
+  };
   render() {
     return (
       <div className="type-content-block" data-index={this.state.currentPage}>
@@ -39,12 +43,14 @@ class ChooseType extends React.Component {
           />
         )}
 
-        {this.props.types.map(type => (
+        {this.state.types.map(type => (
           <Type
             key={type.id}
+            id={type.id}
             title={type.title}
             pic={type.pic}
-            active={type.active}
+            active={type.id === this.state.typeSelectIdx}
+            clickFunc={() => this.clickType(type.id)}
           />
         ))}
       </div>

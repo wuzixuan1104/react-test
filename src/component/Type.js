@@ -2,11 +2,10 @@ import React from "react";
 
 class Type extends React.Component {
   render() {
-    let activeClass = "type-content ";
-    activeClass += this.props.active ? "active" : "";
+    let activeClass = "type-content " + (this.props.active ? "active" : "");
 
     return (
-      <section className={activeClass}>
+      <section className={activeClass} onClick={this.props.clickFunc}>
         <div className="img">
           <embed type="image/svg+xml" src={this.props.pic} />
         </div>

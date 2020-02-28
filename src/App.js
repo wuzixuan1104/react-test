@@ -8,16 +8,7 @@ import Desc from "./component/Desc.js";
 import Form from "./component/Form.js";
 import FooterBg from "./component/FooterBg.js";
 
-const ACCOUNT_TYPES = [
-  { id: 1, title: "Doctor", pic: "asset/img_doctor_90@3x.svg", active: true },
-  { id: 2, title: "Patient", pic: "asset/img_patient_90@3x.svg" },
-  { id: 3, title: "Doctor", pic: "asset/img_doctor_90@3x.svg", active: true },
-  { id: 4, title: "Patient", pic: "asset/img_patient_90@3x.svg" }
-];
-const DESC_LISTS = [
-  "Hello doctor!",
-  "Please fill out the form below to get started"
-];
+import { ACCOUNT_TYPES, DESC_LISTS, FORM_ELEMENTS } from "./data.js";
 
 export default class App extends React.Component {
   render() {
@@ -31,7 +22,7 @@ export default class App extends React.Component {
 
         <Desc lists={DESC_LISTS} />
 
-        <Form />
+        <Form el={FORM_ELEMENTS} />
 
         <FooterBg type="image/svg+xml" pic="asset/img_town_370x170@3x.svg" />
       </div>
