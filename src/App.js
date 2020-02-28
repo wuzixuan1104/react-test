@@ -9,8 +9,10 @@ import Form from "./component/Form.js";
 import FooterBg from "./component/FooterBg.js";
 
 const ACCOUNT_TYPES = [
-  { title: "Doctor", pic: "asset/img_doctor_90@3x.svg", active: true },
-  { title: "Patient", pic: "asset/img_patient_90@3x.svg" }
+  { id: 1, title: "Doctor", pic: "asset/img_doctor_90@3x.svg", active: true },
+  { id: 2, title: "Patient", pic: "asset/img_patient_90@3x.svg" },
+  { id: 3, title: "Doctor", pic: "asset/img_doctor_90@3x.svg", active: true },
+  { id: 4, title: "Patient", pic: "asset/img_patient_90@3x.svg" }
 ];
 const DESC_LISTS = [
   "Hello doctor!",
@@ -20,17 +22,11 @@ const DESC_LISTS = [
 export default class App extends React.Component {
   render() {
     return (
-      <div class="account-type-page">
+      <div className="account-type-page">
         <Header title="Choose Account Type" />
 
-        <div class="type-block">
-          {ACCOUNT_TYPES.map(type => (
-            <ChooseType
-              title={type.title}
-              pic={type.pic}
-              active={type.active}
-            />
-          ))}
+        <div className="type-block">
+          <ChooseType types={ACCOUNT_TYPES} />
         </div>
 
         <Desc lists={DESC_LISTS} />

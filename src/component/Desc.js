@@ -4,9 +4,9 @@ class Desc extends React.Component {
   render() {
     let lists = this.props.lists;
     return (
-      <div class="middle-desc">
+      <div className="middle-desc">
         {lists.map(list => (
-          <p>{list}</p>
+          <p key={list}>{list}</p>
         ))}
       </div>
     );

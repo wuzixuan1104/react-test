@@ -1,0 +1,460 @@
+// @import "mixin";
+
+// html {
+//   position: relative;
+
+//   body {
+//     position: relative;
+
+//     display: inline-block;
+//     width: 100%;
+
+//     margin: 0;
+
+//     background-color: rgba(232, 232, 232, 1.00);
+//     color: rgba(90, 90, 90, 1.00);
+//     text-align: center;
+//     font-size: medium;
+//     font-family: "微軟正黑體", "Open sans", "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+    
+//     // 文字染色，背景色、文字色
+//     @include selection(rgba(120, 186, 255, 1.00), rgba(255, 255, 255, 1));
+//   }
+// }
+
+// $mobileWidth: 600px;
+
+// .account-type-page {
+//     position: relative;
+//     display: inline-block;
+//     width: $mobileWidth;
+//     padding: 30px 50px 250px 50px;
+//     background-color: white;
+//     overflow: hidden;
+
+//     .footer-bg {
+//         position: absolute;
+//         display: inline-block;
+//         width: 100%;
+//         height: 250px;
+//         overflow: hidden;
+//         bottom: 0;
+//         left: 0;
+//         margin: 0 auto;
+//         embed {
+//             width: 100%;
+//         }
+//     }
+
+//     @include range-width(0, $mobileWidth) {
+//         width: 100%;
+//         padding: 25px;
+//         padding-bottom: 150px;
+//         .footer-bg {
+//             height: 150px;
+//         }
+//     }
+// }
+
+// .header {
+//     h1 {
+//         margin: 0 auto;
+//         color: rgba(80, 190, 239, 1.00);
+//         font-weight: normal;
+
+//         @include range-width(0, $mobileWidth) {
+//             font-size: 20px;
+//         }
+//     }
+// }
+// .type-block {
+//     position: relative;
+//     display: flex;
+//     justify-content: space-between;
+//     margin-top: 50px;
+
+//     .arrow {
+//         position: absolute;
+//         top: 66px;
+//         height: 80px;
+//         width: 80px;
+//         font-size: 20px;
+//         background-color: rgba(0, 0, 0, 0.1);
+//         color: white;
+//         text-decoration: none;
+//         z-index: 100;
+
+//         &:hover {
+//             cursor: pointer;
+//         }
+
+//         &:before {
+//             display: inline-block;
+//             line-height: 80px;
+//             font-size: 28px;
+
+//         }
+//         &.prev {
+//             left: -85px;
+//             border-radius: 50%;
+//             &:before {
+//                 margin-left: 30px;
+//             }
+//         }
+//         &.next {
+//             right: -85px;
+//             border-radius: 50%;
+//             &:before {
+//                 margin-right: 30px;
+//             }
+//         }
+
+//         @include range-width(0, $mobileWidth) {
+//             height: 60px;
+//             width: 60px;
+//             top: 28px;
+
+//             &:before {
+//                 line-height: 60px;
+//                 font-size: 25px;
+//             }
+//             &.prev {
+//                 left: -46px;
+//                 &:before {
+//                     margin-left: 15px;
+//                 }
+//             }
+//             &.next {
+//                 right: -46px;
+//                 &:before {
+//                     margin-right: 15px;
+//                 }
+//             }
+//         }
+//     }
+
+//     .type-content-block {
+//         display: flex;
+//         overflow: hidden;
+//         padding-bottom: 20px;
+
+//         .type-content {
+//             position: relative;
+//             flex-direction: column;
+//             width: calc(50% - 20px);
+//             padding: 20px;
+//             left: 8%;
+//             border: 2px solid rgba(238, 241, 244, 1.00);
+//             @include border-radius(5px);
+//             transition: all .5s;
+
+//             + .type-content {
+//                 margin-left: 30px;
+//             }
+//             &.active {
+//                 border: 2px solid rgba(205, 239, 253, 1.00);
+//                 .check-marker {
+//                     @include opacity(1);
+//                 }
+//             }
+
+//             .img {
+//                 display: inline-block;
+//                 width: 150px;
+//                 embed {
+//                     width: 100%;
+//                 }
+//             }
+//             .title {
+//                 margin-top: 15px;
+//                 font-weight: normal;
+//                 color: rgba(43, 58, 81, 1.00);
+//             }
+
+//             .check-marker {
+//                 position: absolute;
+//                 bottom: -20px;
+//                 right: -10px;
+//                 width: 45px;
+//                 height: 45px;
+//                 background-color: rgba(58, 181, 237, 1.00);
+//                 @include border-radius(50%);
+//                 @include opacity(0);
+//                 @include transition(all .5s);
+
+//                 &:before {
+//                     display: inline-block;
+//                     color: white;
+//                     line-height: 45px;
+//                 }
+//             }
+
+//             @include range-width(0, $mobileWidth) {
+//                 padding: 10px;
+//                 width: calc(50% - 15px);
+//                 .img {
+//                     width: 110px;
+//                 }
+//                 .title {
+//                     margin-top: 4px;
+//                     font-size: 13px;
+//                 }
+//                 .check-marker {
+//                     width: 30px;
+//                     height: 30px;
+//                     bottom: -15px;
+//                     right: -6px;
+
+//                     &:before {
+//                         line-height: 33px;
+//                         font-size: 12px;
+//                     }
+//                 }
+
+//                 + .type-content {
+//                     margin-left: 20px;
+//                 }
+//             }
+//         }
+//         @for $i from 1 through 10 {
+//             &[data-index="#{$i}"] {
+//                 .type-content {
+//                     left: calc(0% + ((#{$i} - 1) * -85%));
+//                 }
+//             }
+//         }
+
+//         @include range-width(0, $mobileWidth) {
+//             @for $i from 1 through 10 {
+//             &[data-index="#{$i}"] {
+//                     .type-content {
+//                         left: calc(0% + ((#{$i} - 1) * -95%));
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// .middle-desc {
+//     display: inline-block;
+//     margin-top: 16px;
+
+//     p {
+//         color: rgba(189, 189, 189, 1.00);
+//         letter-spacing: 1.2px;
+//     }
+
+//     @include range-width(0, $mobileWidth) {
+//         margin-top: 20px;
+//         p {
+//             font-size: 13px;
+//             letter-spacing: 0;
+//         }
+//     }
+// }
+
+// .login-form {
+//     margin-top: 16px;
+//     > * {
+//         display: inline-block;
+//         width: 100%;
+     
+//     }
+
+//     .error {
+//         display: none;
+//         margin-top: 10px;
+//         border: 1px solid rgb(249, 134, 134);
+//         text-align: left;
+//         padding: 5px 10px;
+//         font-size: 18px;
+//         background-color: rgb(255, 233, 233);
+//         color: rgb(249, 134, 134);
+//         @include border-radius(5px);
+//         &:before {
+//             display: inline-block;
+//             margin: 2px;
+//             margin-right: 10px;
+//         }
+//         &.active {
+//             display: block;
+//         }
+//     }
+   
+        
+
+        
+//     .input-block {
+//         position: relative;
+
+//         display: inline-block;
+//         width: 100%;
+        
+//         * {
+//             display: inline-block;
+//             width: 100%;
+//             + * {
+//                 margin-top: 20px;
+//             }
+//         }
+
+//         &.active {
+//             &:before {
+//                 display: block;
+//             }
+//         }
+
+//         .type-title {
+//             position: absolute;
+//             width: auto;
+//             top: -14px;
+//             left: 20px;
+//             padding: 5px 10px;
+//             font-size: 13px;
+//             color: white;
+//             background-color: rgba(47, 179, 236, 1.00);
+//             @include border-radius(5px);
+//             @include opacity(0);
+//             @include transition(opacity .3s);
+//         }
+
+//         input {
+//             height: 55px;
+//             line-height: calc(50px - 2px - 1px);
+//             color: rgba(0, 0, 0, 1.00);
+//             font-size: 18px;
+//             border: 2px solid rgba(233, 236, 239, 1.00);
+//             padding: 0 50px;
+//             padding-right: 110px;
+
+//             @include border-radius(5px);
+//             @include input-placeholder {
+//               color: rgba(197, 198, 197, 1.00);
+//             }
+
+//             @include transition(border .3s);
+//             &:focus {
+//                 outline: 0;
+//                 border: 2px solid rgba(16, 175, 236, 1.00);
+//                 ~ .type-title {
+//                     @include opacity(1);
+//                 }
+//             }
+//         }
+
+//         a {
+//             position: absolute;
+//             display: inline-block;   
+//             width: auto;
+//             top: 13px;
+//             right: 0px;
+//             padding: 5px 20px;
+//             border-left: 2px solid rgba(234, 234, 234, 1.00);
+//             text-decoration: none;
+//             color: rgba(92, 190, 239, 1.00);
+//         }
+
+//         i.icon {
+//             position: absolute;
+//             top: 39px;
+//             left: 20px;
+//             width: auto;
+//             font-size: 18px;
+//             color: rgba(197, 198, 197, 1.00);
+//         }
+//     }
+
+//     .error-txt {
+//         margin-top: 5px;
+//         display: none;
+
+//         &.active {
+//             display: block;
+//         }
+//     }
+
+//     .footer-block {
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         margin-top: 20px;
+
+//         .signup {
+//             color: rgba(166, 166, 166, 1.00);
+
+//             a {
+//                 color: rgba(92, 190, 239, 1.00);
+//                 text-decoration: none;
+//             }
+//         }
+
+//         button[type="submit"] {
+//             position: relative;
+//             width: 150px;
+//             height: 50px;
+//             font-size: 20px;
+//             color: white;
+//             background-color: rgba(56, 181, 237, 1.00);
+//             border: none;
+//             z-index: 1;
+//             @include border-radius(10px);
+//             &:hover {
+//                 cursor: pointer;
+//             }
+//         }
+//     }
+
+//     @include range-width(0, $mobileWidth) { 
+//         margin-top: 5px;
+
+//         .error {
+//             font-size: 15px;
+//         }
+
+//         .input-block {
+//             input {
+//                 height: 50px;
+//                 font-size: 15px;
+//             }
+
+//             .type-title {
+//                 font-size: 12px;
+//             }
+
+//             a {
+//                 font-size: 15px;
+//                 top: 11px;
+//             }
+
+//             i.icon {
+//                 top: 36px;
+//             }
+//         }
+
+//         .footer-block {
+//             .signup {
+//                 font-size: 15px;
+//             }
+//             button[type="submit"] {
+//                 width: 120px;
+//                 height: 40px;
+//                 font-size: 15px;
+//                 @include border-radius(5px);
+//             }
+//         }
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+

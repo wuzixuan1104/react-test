@@ -4,12 +4,12 @@ class FormInput extends React.Component {
   render() {
     let iconClass = "icon " + this.props.icon;
     return (
-      <label class="input-block">
+      <label className="input-block">
         <i className={iconClass} />
         <input type={this.props.type} placeholder={this.props.placeholder} />
-        <span class="type-title">{this.props.title}</span>
+        <span className="type-title">{this.props.title}</span>
         {this.props.link !== null && (
-          <a href={this.props.link.href} class="forgot">
+          <a href={this.props.link.href} className="forgot">
             {this.props.link.name}
           </a>
         )}
