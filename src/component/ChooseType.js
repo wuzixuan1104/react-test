@@ -24,6 +24,7 @@ class ChooseType extends React.Component {
   };
   clickType = id => {
     this.setState({ typeSelectIdx: id });
+    this.props.clickFunc(id);
   };
   render() {
     return (

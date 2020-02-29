@@ -1,28 +1,32 @@
 export function fakeBackend() {
   let users = [
     {
-      id: 1,
+      type: 1,
       email: "hi.shari.wu@gmail.com",
       password: "123456"
     }
   ];
+  let dbUsers = JSON.parse(localStorage.getItem("allUsers"));
+  if (dbUsers) users = users.concat(dbUsers);
+
   let realFetch = window.fetch;
   window.fetch = function(url, opts) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // authenticate
         if (url.endsWith("/users/checkAuth") && opts.method === "POST") {
           let params = JSON.parse(opts.body);
           let filteredUsers = users.filter(user => {
             return (
-              user.email === params.email && user.password === params.password
+              user.email === params.email &&
+              user.password === params.password &&
+              user.type === params.type
             );
           });
 
           if (filteredUsers.length > 0) {
             let user = filteredUsers[0];
             let responseJson = {
-              id: user.id,
+              type: user.type,
               email: user.email
             };
             resolve({
@@ -30,7 +34,7 @@ export function fakeBackend() {
               text: () => Promise.resolve(JSON.stringify(responseJson))
             });
           } else {
-            reject("信箱及密碼不正確");
+            reject("login fail");
           }
 
           return;
@@ -47,6 +51,25 @@ export function fakeBackend() {
             });
           } else {
             resolve({ status: 401, text: () => Promise.resolve() });
+          }
+
+          return;
+        }
+
+        if (url.endsWith("/users/signin") && opts.method === "POST") {
+          let params = JSON.parse(opts.body);
+          let filteredUsers = users.filter(user => {
+            return user.email === params.email && user.type === params.type;
+          });
+
+          if (filteredUsers.length < 1) {
+            users = users.concat(params);
+            resolve({
+              ok: true,
+              text: () => Promise.resolve(JSON.stringify(users))
+            });
+          } else {
+            reject("sign in fail");
           }
 
           return;

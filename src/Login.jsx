@@ -9,22 +9,28 @@ import FooterBg from "./component/FooterBg.js";
 import { userService } from "./service";
 
 import { ACCOUNT_TYPES, DESC_LISTS, FORM_ELEMENTS } from "./data.js";
-import { checkContinueStrInvalid } from "./function/common.js";
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      response: null
+      response: null,
+      accountType: 1
     };
   }
   sendForm = data => {
-    // if (!this.verifyParams(data)) return false;
-    //send axios
-    userService.login(data.email, data.password).then(
+    const isVerify = userService.checkFormVerify(data, this.state.accountType);
+    if (typeof isVerify === "object" && "error" in isVerify) {
+      this.setErrorHandler(isVerify.error);
+      return false;
+    }
+    //clear error message
+    this.setErrorHandler();
+
+    userService.login(data.email, data.password, this.state.accountType).then(
       user => {
         const { from } = this.props.location.state || {
-          from: { pathname: "/home" }
+          from: { pathname: "/" }
         };
         this.props.history.push(from);
       },
@@ -34,35 +40,9 @@ export default class Login extends React.Component {
     );
   };
 
-  verifyParams(data) {
-    if (
-      !(
-        data &&
-        typeof data === "object" &&
-        "email" in data &&
-        "password" in data
-      )
-    ) {
-      this.setErrorHandler("請填寫完整表單！");
-      return false;
-    }
-
-    let email = data.email;
-    let pwd = data.password;
-
-    if (!(email && pwd)) {
-      this.setErrorHandler("請輸入信箱及密碼！");
-      return false;
-    }
-    if (!checkContinueStrInvalid(email, pwd, 6)) {
-      this.setErrorHandler(
-        "請輸入密碼的任意連續 6 碼，不可以和帳號的任意連續 6 碼重複信箱及密碼！"
-      );
-      return false;
-    }
-    this.setErrorHandler();
-    return true;
-  }
+  changeType = id => {
+    this.setState({ accountType: id });
+  };
 
   setErrorHandler(msg = "") {
     let response = { error: msg };
@@ -75,7 +55,7 @@ export default class Login extends React.Component {
         <Header title="Choose Account Type" />
 
         <div className="type-block">
-          <ChooseType types={ACCOUNT_TYPES} />
+          <ChooseType types={ACCOUNT_TYPES} clickFunc={this.changeType} />
         </div>
 
         <Desc lists={DESC_LISTS} />
