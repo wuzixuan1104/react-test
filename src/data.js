@@ -14,6 +14,7 @@ export const DESC_LISTS = [
 ];
 export const FORM_ELEMENTS = [
   {
+    htmlTag: "input",
     type: "text",
     name: "email",
     icon: "icon-mail",
@@ -22,6 +23,7 @@ export const FORM_ELEMENTS = [
     link: null
   },
   {
+    htmlTag: "input",
     type: "password",
     name: "password",
     icon: "icon-key1",

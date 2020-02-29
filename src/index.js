@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./App";
+import "./css/style.css";
+import Route from "./Route";
+import { fakeBackend } from "./helper";
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  rootElement
-);
+import config from "react-global-configuration";
+import configuration from "./config";
+
+config.set(configuration);
+
+ReactDOM.render(<Route />, document.getElementById("root"));
+fakeBackend();
